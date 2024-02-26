@@ -1,0 +1,102 @@
+{
+    "hd1":{
+        "T1":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T2":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T3":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T4":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T5":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T6":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T7":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T8":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T9":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T10":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T11":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T12":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        }
+    },
+    "hd2":{
+        "T1":{
+            "Codice_utensile": "UTLIXXXX",
+            "Codice_inserto": "INSRXXXX"
+        },
+        "T2":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T3":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T4":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T5":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T6":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T7":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T8":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T9":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T10":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T11":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        },
+        "T12":{
+            "Codice_utensile": "UTLIXXXX",
+             "Codice_inserto": "INSRXXXX"
+        }
+    }
+}
