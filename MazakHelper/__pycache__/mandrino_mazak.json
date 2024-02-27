@@ -1,0 +1,13 @@
+{
+    "hd1":{
+        "codice_morsa_A": "UMOI XXX + UMOI XXX",
+        "codice_morsa_B": "UMOI XXX + UMOI XXX",
+        "codice_appoggio": "UAGG XXX",
+        "codice_centraggio_sfera": "UAGG XXX"
+    },
+    "hd2":{
+        "codice_staffe": "UMOI XXX",
+        "codice_appoggio": "UAGG XXX",
+        "codice_cono_centr": "UFLA XXX"
+    }
+}

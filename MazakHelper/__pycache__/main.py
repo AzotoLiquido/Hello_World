@@ -1,6 +1,6 @@
 from logo import logo # Importo il logo dal file logo
 import os # Importo la libreria os
-import json
+from attrezzaggio import carica_torretta_mazak,carica_mandrino_mazak,attrezzaggio_forcella,attrez_mandrino_hd1,attrez_mandrino_hd2,attrez_torretta_hd1,attrez_torretta_hd2
 
 #creo e descrivo gli attributi dell'oggetto forcella
 class Forcella:
@@ -23,30 +23,21 @@ class Forcella:
         testo_formattato = f"\n[Dettagli Forcella]\n\n[1] Codice_Materiale: {self.codice_materiale}\n[2] Altezza_totale: {self.h_tot}\n[3] Centro_Sfera: {self.centro_sfera}\n[4] Centro_occhi: {self.centro_occhi}\n[5] Sottoponte: {self.sottoponte}\n[6] Distanza_canaline: {self.dist_canaline}\n[7] Diametro_occhi: {self.diam_occhi}\n[8] Diametro_canaline: {self.diam_canaline}\n[9] Diametro_interno_flangia: {self.diam_flangia_int}\n[10] Diametro_esterno_flangia: {self.diam_flangia_est}\n[11] Diametro_sfera: {self.diam_sfera}\n[12] Quota_'G': {self.quota_g}"
         delimitatore = "_"*50
         return f"\n{delimitatore}\n{testo_formattato}\n{delimitatore}\n"
-
-#Creo degli oggetti Forcella d'esempio.
+    
+# #Creo degli oggetti Forcella d'esempio.
 codice_G = Forcella(codice_materiale="2150G0042",h_tot=118.000,centro_sfera=107.860,centro_occhi=65.500,sottoponte=81.000,dist_canaline=102.860,diam_occhi=27.000,diam_canaline=29.800,diam_flangia_int=63.000,diam_flangia_est=75.000,diam_sfera=28.000,quota_g=17.100)
-codice_L = Forcella(codice_materiale="2150L0046",h_tot=129.800,centro_sfera=117.500,centro_occhi=73.000,sottoponte=88.500,dist_canaline=109.850,diam_occhi=30.200,diam_canaline=33.000,diam_flangia_int=63.000,diam_flangia_est=80.000,diam_sfera=34.000,quota_g=17.100)
-
-def attrezzaggio(codice_forcella):
-    separatore = "-"*50
-    separatore2 = "-"*80
-    print(f"[Codice Forcella]: {codice_forcella}\n\n[Mandrino]: HD1\n{separatore}\n| Morsa_A: XXXXXXXXX \n|\n| Morsa_B: XXXXXXXXX \n{separatore}\n\n")
-    print(f"[Torretta]: HD1\n\n{separatore2}\n| T1: {torretta_mazak["hd1"]["T1"]}\n|\n| T2: {torretta_mazak["hd1"]["T2"]}\n|\n| T3: {torretta_mazak["hd1"]["T3"]}\n|\n| T4: {torretta_mazak["hd1"]["T4"]}\n|\n| T5: {torretta_mazak["hd1"]["T5"]}\n|\n| T6: {torretta_mazak["hd1"]["T6"]}\n|\n| T7: {torretta_mazak["hd1"]["T7"]}\n|\n| T8: {torretta_mazak["hd1"]["T8"]}\n|\n| T9: {torretta_mazak["hd1"]["T9"]}\n|\n| T10: {torretta_mazak["hd1"]["T10"]}\n|\n| T11: {torretta_mazak["hd1"]["T11"]}\n|\n| T12: {torretta_mazak["hd1"]["T12"]}")
+codice_L = Forcella(codice_materiale="2150L0046",h_tot=129.800,centro_sfera=117.500,centro_occhi=73.000,sottoponte=88.500,dist_canaline=109.850,diam_occhi=30.200,diam_canaline=33.000,diam_flangia_int=63.000,diam_flangia_est=80.000,diam_sfera=34.000,quota_g=17.100)   
     
-    
-def carica_torretta_mazak(torretta_mazak):
-    file=open("torretta_mazak.json","r")
-    torretta_mazak = json.load(file)
-    return torretta_mazak
 
 # Creo una lista dove verranno aggiunti i codici materiale delle forcelle
 codici_forcelle = [codice_G.codice_materiale, codice_L.codice_materiale]
 torretta_mazak = {}
 torretta_mazak = carica_torretta_mazak(torretta_mazak)
+mandrino_mazak = {}
+mandrino_mazak = carica_mandrino_mazak(mandrino_mazak)
 
-# print(codice_G.show_details(),codice_L.show_details())
-
+print("\033c",end="")
+print(logo)
 print("Benvenuto nel Mazak_Helper.\nQui sotto troverai una serie di comandi utili per poter utilizzare lo script in maniera corretta.")
 
 commands=["Attrezzaggio_macchina","Risoluzione Problemi","Admin_Commands","About","Exit"] # Lista comandi principali
@@ -65,8 +56,25 @@ if selezione == "1":
             print("Trovato.")
             if i == codice_G.codice_materiale:
                 print(codice_G.show_details())
-                print(attrezzaggio(codice_G.codice_materiale))
-                # print(torretta_mazak["hd1"])
+                lista_opzioni = ["[Mandrino_HD1]", "[Torretta_HD1]", "[Mandrino_HD2]", "[Torretta_HD2]", "[Attrezzaggio_completo]"]
+                numero = 0
+                for i in lista_opzioni:
+                    numero += 1
+                    print(f"[{numero}] {i}")
+                selezione = input("\nCosa desideri visualiizare?\n>>> ")
+                if selezione == "1":
+                    attrez_mandrino_hd1()
+                elif selezione == "2":
+                    attrez_torretta_hd1()
+                elif selezione == "3":
+                    attrez_mandrino_hd2()
+                elif selezione == "4":
+                    attrez_torretta_hd2()
+                elif selezione == "5":
+                    attrezzaggio_forcella()
+                else:
+                    print("Comando Inesistente.")
+                    break
             elif i == codice_L.codice_materiale:
                 print(codice_L.show_details())
             break 
