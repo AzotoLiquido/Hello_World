@@ -278,8 +278,8 @@ robot_mazak = carica_robot_mazak(robot_mazak)
 ## [DEBUG] ##
 # print("\033c",end="")
 # print(mandrino_mazak["hd1"]["codice_morsa_A"])
-codice_forcella = "2150L0046"
-attrezzaggio_forcella(codice_forcella)
+# codice_forcella = "2150L0046"
+# attrezzaggio_forcella(codice_forcella)
 # attrez_robot_mazak(codice_forcella)
 # attrez_mandrino_hd1(codice_forcella)
 # attrez_torretta_hd1(codice_forcella)
