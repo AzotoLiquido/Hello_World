@@ -1,7 +1,8 @@
 from logo import logo,logo_attrezzaggio # Importo i loghi dal file logo
 import os # Importo la libreria os
-from attrezzaggio import carica_torretta_mazak,carica_mandrino_mazak,attrezzaggio_forcella,attrez_mandrino_hd1,attrez_mandrino_hd2,attrez_torretta_hd1,attrez_torretta_hd2
+from attrezzaggio import carica_torretta_mazak,carica_mandrino_mazak,attrezzaggio_forcella,attrez_mandrino_hd1,attrez_mandrino_hd2,attrez_torretta_hd1,attrez_torretta_hd2,attrez_robot_mazak,torretta_mazak,mandrino_mazak
 from colorama import Fore, Back, Style
+from PIL import Image
 
 #creo e descrivo gli attributi dell'oggetto forcella
 class Forcella:
@@ -32,74 +33,125 @@ codice_L = Forcella(codice_materiale="2150L0046",h_tot=129.800,centro_sfera=117.
 
 # Creo una lista dove verranno aggiunti i codici materiale delle forcelle
 codici_forcelle = [codice_G.codice_materiale, codice_L.codice_materiale]
-torretta_mazak = {}
-torretta_mazak = carica_torretta_mazak(torretta_mazak)
-mandrino_mazak = {}
-mandrino_mazak = carica_mandrino_mazak(mandrino_mazak)
+acceso = True
 
-print("\033c",end="")
-print(Fore.LIGHTGREEN_EX+logo)
-print(Style.RESET_ALL)
-print("Benvenuto nel Mazak_Helper.\nQui sotto troverai una serie di comandi utili per poter utilizzare lo script in maniera corretta.\n")
-
-commands=["Attrezzaggio_macchina","Risoluzione Problemi","Admin_Commands","About","Exit"] # Lista comandi principali
-for i in range(len(commands)): # Printo la lista comandi formattata 
-    i+=1
-    print(f"[{i}]{commands[i-1]}\n")
-selezione=str(input("Seleziona un opzione:\n>>> ")) # Chiedo all'utente quale comando vuole usare
-if selezione == "1":
-    os.system("cls")
-    print(Fore.LIGHTRED_EX+logo_attrezzaggio)
+while acceso:
+    print("\033c",end="")
+    print(Fore.GREEN+logo)
     print(Style.RESET_ALL)
-    print(" [ATTREZZAGGIO_MACCHINA]\n\n") 
-    codice_forcella = str(input("Inserisci il codice della forcella:\n>>> ")) # Chiedo all'utente il codice della forcella
-    # codice_forcella = "2150G0042" #codice debugging(da cancellare)
-    for i in codici_forcelle:
+    print("Benvenuto nel Mazak_Helper.\nQui sotto troverai una serie di comandi utili per poter utilizzare lo script in maniera corretta.\n")
+
+    commands=["Attrezzaggio_macchina","Risoluzione Problemi","Comandi_Amministratore","About","Exit"] # Lista comandi principali
+    for i in range(len(commands)): # Printo la lista comandi formattata 
+        i+=1
+        print(f"[{i}]{commands[i-1]}\n")
+    print("Seleziona un opzione:\n")
+    selezione=str(input(Fore.YELLOW+">>> ")) # Chiedo all'utente quale comando vuole usare
+    if selezione == "1":
         print("\033c",end="")
-        if codice_forcella == i:
-            print("Trovato.")
-            if i == codice_G.codice_materiale:
-                print(codice_G.show_details())
-                lista_opzioni = ["[Mandrino_HD1]", "[Torretta_HD1]", "[Mandrino_HD2]", "[Torretta_HD2]", "[Attrezzaggio_completo]"]
-                numero = 0
+        print(Fore.LIGHTRED_EX+logo_attrezzaggio)
+        print(Style.RESET_ALL)
+        print(" [ATTREZZAGGIO_MACCHINA]\n\n") 
+        print("Inserisci il codice della forcella:\n")
+        codice_forcella = str(input(Fore.RED+">>> ")).upper() # Chiedo all'utente il codice della forcella
+        print(Fore.RESET)
+        for i in codici_forcelle: # Itero per ogni elemento nella lista dei codici delle forcelle
+            lista_opzioni = ["[Mandrino_HD1]", "[Torretta_HD1]", "[Mandrino_HD2]", "[Torretta_HD2]", "Robot_Trasportatore","[Attrezzaggio_completo]"]
+            numero = 0
+            if codice_forcella == codice_G.codice_materiale: # Controllo se il codice dell'utente corrisponde a quello della tipologia "G"
+                print(codice_G.show_details()) # Mostro i dettagli della forcella da lavorare
+                img_forcella1 = Image.open("forcella_lato1.jpg")
+                img_forcella2 = Image.open("forcella_lato2.jpg")
+                img_forcella1.show()
+                img_forcella2.show()
+                for i in lista_opzioni: #Creo un menu, dove chiedo all'utente quale parte dell'attrezzaggio visualizzare 
+                    numero += 1
+                    print(f"[{numero}] {i}")
+                print("\nCosa desideri visualizzare?\n")
+                selezione = input(Fore.RED+">>> ")
+                print(Fore.RESET)
+                if selezione == "1": # se l'utente ha selezionato 1 mostrerò l'attrezzaggio del mandrino hd1
+                    attrez_mandrino_hd1(codice_forcella)
+                    input(">")
+                elif selezione == "2":# se l'utente seleziona 2 mostrerò l'attrezzaggio della torretta hd1
+                    attrez_torretta_hd1(codice_forcella)
+                    input(">")
+                elif selezione == "3":# se l'utente seleziona 3 mostrerò l'attrezzaggio del mandrino hd2
+                    attrez_mandrino_hd2(codice_forcella)
+                    input(">")
+                elif selezione == "4":# se l'utente seleziona 4 mostrerò l'attrezzaggio della torretta hd2
+                    attrez_torretta_hd2(codice_forcella)
+                    input(">")
+                elif selezione == "5":# se l'utente seleziona 5 mostrerò l'attrezzaggio completo del mazak
+                    print("\033c",end="")
+                    attrez_robot_mazak(codice_forcella)
+                    input(">")
+                elif selezione == "6":
+                    print("\033c",end="")
+                    attrezzaggio_forcella(codice_forcella)
+                    input(">")
+                else:# altrimenti dirò all'utente che il comando non esiste e cesserò il programma
+                    print("Comando Inesistente.")
+                    input(">")
+                break
+                    
+            elif codice_forcella == codice_L.codice_materiale:
+                print(codice_L.show_details())
                 for i in lista_opzioni:
                     numero += 1
                     print(f"[{numero}] {i}")
-                selezione = input("\nCosa desideri visualiizare?\n>>> ")
+                selezione = input("\nCosa desideri visualizzare?\n>>> ")
                 if selezione == "1":
-                    attrez_mandrino_hd1()
+                    attrez_mandrino_hd1(codice_forcella)
+                    input(">")
                 elif selezione == "2":
-                    attrez_torretta_hd1()
+                    attrez_torretta_hd1(codice_forcella)
+                    input(">")
                 elif selezione == "3":
-                    attrez_mandrino_hd2()
+                    attrez_mandrino_hd2(codice_forcella)
+                    input(">")
                 elif selezione == "4":
-                    attrez_torretta_hd2()
+                    attrez_torretta_hd2(codice_forcella)
+                    input(">")
                 elif selezione == "5":
-                    attrezzaggio_forcella()
+                    print("\033c",end="")
+                    attrez_mandrino_hd1(codice_forcella)
+                    input(">")
+                elif selezione == "6":
+                    print("\033c",end="")
+                    attrezzaggio_forcella(codice_forcella)
+                    input(">")
                 else:
-                    print("Comando Inesistente.")
-                    break
-            elif i == codice_L.codice_materiale:
-                print(codice_L.show_details())
-            break 
-        else:
-            print("Non Trovato")
-    pass
-elif selezione == "2":
-    os.system("cls")
-    print("[RISOLUZIONE_PROBLEMI]\n\n")
-    problema = input("Inserisci il testo del problema.\n>>> ")
-    pass
-elif selezione == "3":
-    os.system("cls")
-    print("[ADMIN'S_CONTROL_PANEL]")
-elif selezione == "4":
-    os.system("cls")
-    print("[_ABOUT_]\n\n")
-    print()
-    pass
-elif selezione == "5":
-    os.system("cls")
-    print("[_EXIT_]\n\nArrivederci\n\n")
-    os.system("exit")
-    pass
+                    print(f"Codice {codice_forcella} non Trovato")
+                break
+        print(Fore.RESET)
+    elif selezione == "2":
+        print("\033c",end="[RISOLUZIONE_PROBLEMI]\n\n")
+        errori=["Relè termico","Malfunz. Controller Robot","Sovraccarico","Door or fence open"]
+        tipologia_errore=["Meccanico","Operatore",""]
+        n=0
+        for i in errori:
+            n +=1
+            x = f"[{n}] Errore: {i}" 
+            print(x)
+        problema = input("\nSeleziona il problema.\n>>> ")
+        if problema == "1":
+            print("")
+            pass
+        if problema == "2":
+            pass
+        if problema == "3":
+            pass
+        if problema == "4":
+            pass
+    elif selezione == "3":
+        print("\033c",end="[COMANDI_AMMINISTRATORE]")
+    elif selezione == "4":
+        print("\033c",end="[_ABOUT_]\n\n")
+    elif selezione == "5":
+        print("\033c",end="[_EXIT_]\n\nArrivederci\n\n")
+        acceso = False
+
+
+
+
