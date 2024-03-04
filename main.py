@@ -1,8 +1,27 @@
-from logo import logo,logo_attrezzaggio # Importo i loghi dal file logo
-import os # Importo la libreria os
+from logo import logo,logo_attrezzaggio,logo_risol_problemi,logo_admin,logo_bondioli# Importo i loghi dal file logo
 from attrezzaggio import carica_torretta_mazak,carica_mandrino_mazak,attrezzaggio_forcella,attrez_mandrino_hd1,attrez_mandrino_hd2,attrez_torretta_hd1,attrez_torretta_hd2,attrez_robot_mazak,torretta_mazak,mandrino_mazak
-from colorama import Fore, Back, Style
 from PIL import Image
+from risoluzione_problemi import risoluzione_problemi, risoluzione_problema, carica_risoluzione_problemi
+from admin_commands import carica_lista_admin,lista_admin,verification_login,formatta_comandi
+from aggiusta_quote import misura_centro_occhi,misura_centro_sfera,misura_diam_flangia_est,misura_diam_flangia_int,misura_diam_occhi,misura_diam_sfera,misura_dist_canaline,misura_h_tot
+import os
+import sys
+import time
+
+def loading_bar(causale, esito):
+    timer = 0
+    loading = f"{causale}: [--------]"
+    backtrack = '\b'*len(loading)
+
+    while timer < 6:
+        sys.stdout.write(backtrack + loading)
+        sys.stdout.flush()
+        loading = loading.replace("-","=",1)
+        time.sleep(0.5)
+        timer += 1
+    time.sleep(0.5)
+    sys.stdout.write(backtrack)
+    print (loading + esito)
 
 #creo e descrivo gli attributi dell'oggetto forcella
 class Forcella:
@@ -29,7 +48,7 @@ class Forcella:
 # #Creo degli oggetti Forcella d'esempio.
 codice_G = Forcella(codice_materiale="2150G0042",h_tot=118.000,centro_sfera=107.860,centro_occhi=65.500,sottoponte=81.000,dist_canaline=102.860,diam_occhi=27.000,diam_canaline=29.800,diam_flangia_int=63.000,diam_flangia_est=75.000,diam_sfera=28.000,quota_g=17.100)
 codice_L = Forcella(codice_materiale="2150L0046",h_tot=129.800,centro_sfera=117.500,centro_occhi=73.000,sottoponte=88.500,dist_canaline=109.850,diam_occhi=30.200,diam_canaline=33.000,diam_flangia_int=63.000,diam_flangia_est=80.000,diam_sfera=34.000,quota_g=17.100)   
-    
+
 
 # Creo una lista dove verranno aggiunti i codici materiale delle forcelle
 codici_forcelle = [codice_G.codice_materiale, codice_L.codice_materiale]
@@ -37,39 +56,41 @@ acceso = True
 
 while acceso:
     print("\033c",end="")
-    print(Fore.GREEN+logo)
-    print(Style.RESET_ALL)
-    print("Benvenuto nel Mazak_Helper.\nQui sotto troverai una serie di comandi utili per poter utilizzare lo script in maniera corretta.\n")
+    print(f"{"\033[0;32m"}{logo}{"\033[0m"}")
+    loading_bar("Caricamento Mazak_Helper in corso","Apertura Mazak_Helper")
+    print(f"Benvenuto nel Mazak_Helper.\nQui sotto troverai una serie di comandi utili per poter utilizzare il programma in maniera corretta.\n")
 
-    commands=["Attrezzaggio_macchina","Risoluzione Problemi","Comandi_Amministratore","About","Exit"] # Lista comandi principali
+    commands=["Attrezzaggio_macchina","Risoluzione_Problemi","Aggiusta_Quota","Comandi_Amministratore","About","Exit"] # Lista comandi principali
     for i in range(len(commands)): # Printo la lista comandi formattata 
         i+=1
-        print(f"[{i}]{commands[i-1]}\n")
+        x = f"[{i}]{commands[i-1]}\n"
+        print(x)
     print("Seleziona un opzione:\n")
-    selezione=str(input(Fore.YELLOW+">>> ")) # Chiedo all'utente quale comando vuole usare
+    selezione=str(input(f"{"\033[0;32m"}>>> ")) # Chiedo all'utente quale comando vuole usare
+    print(f"\033[0m")
     if selezione == "1":
         print("\033c",end="")
-        print(Fore.LIGHTRED_EX+logo_attrezzaggio)
-        print(Style.RESET_ALL)
+        print(f"{"\033[0;31m"}{logo_attrezzaggio}{"\033[0m"}")
         print(" [ATTREZZAGGIO_MACCHINA]\n\n") 
         print("Inserisci il codice della forcella:\n")
-        codice_forcella = str(input(Fore.RED+">>> ")).upper() # Chiedo all'utente il codice della forcella
-        print(Fore.RESET)
+        codice_forcella = str(input(f"{"\033[0;31m"}>>> ")).upper() # Chiedo all'utente il codice della forcella
+        print("\033[0m")
         for i in codici_forcelle: # Itero per ogni elemento nella lista dei codici delle forcelle
             lista_opzioni = ["[Mandrino_HD1]", "[Torretta_HD1]", "[Mandrino_HD2]", "[Torretta_HD2]", "Robot_Trasportatore","[Attrezzaggio_completo]"]
             numero = 0
             if codice_forcella == codice_G.codice_materiale: # Controllo se il codice dell'utente corrisponde a quello della tipologia "G"
                 print(codice_G.show_details()) # Mostro i dettagli della forcella da lavorare
-                img_forcella1 = Image.open("forcella_lato1.jpg")
-                img_forcella2 = Image.open("forcella_lato2.jpg")
+                img_forcella1 = Image.open("forcella_lato1_G.jpg")
+                img_forcella2 = Image.open("forcella_lato2_G.jpg")
                 img_forcella1.show()
                 img_forcella2.show()
                 for i in lista_opzioni: #Creo un menu, dove chiedo all'utente quale parte dell'attrezzaggio visualizzare 
                     numero += 1
+  
                     print(f"[{numero}] {i}")
                 print("\nCosa desideri visualizzare?\n")
-                selezione = input(Fore.RED+">>> ")
-                print(Fore.RESET)
+                selezione = input(f"{"\033[0;31m"}>>> ")
+                print("\033[0m")
                 if selezione == "1": # se l'utente ha selezionato 1 mostrerò l'attrezzaggio del mandrino hd1
                     attrez_mandrino_hd1(codice_forcella)
                     input(">")
@@ -97,6 +118,10 @@ while acceso:
                     
             elif codice_forcella == codice_L.codice_materiale:
                 print(codice_L.show_details())
+                img_forcella1 = Image.open("forcella_lato1_L.jpg")
+                img_forcella2 = Image.open("forcella_lato2_L.jpg")
+                img_forcella1.show()
+                img_forcella2.show()
                 for i in lista_opzioni:
                     numero += 1
                     print(f"[{numero}] {i}")
@@ -121,34 +146,122 @@ while acceso:
                     print("\033c",end="")
                     attrezzaggio_forcella(codice_forcella)
                     input(">")
-                else:
-                    print(f"Codice {codice_forcella} non Trovato")
+            else:
+                input(f"Codice {codice_forcella} non Trovato\n>>> ")  
                 break
-        print(Fore.RESET)
     elif selezione == "2":
         print("\033c",end="[RISOLUZIONE_PROBLEMI]\n\n")
+        print(f"{"\033[0;31m"}{logo_risol_problemi}{"\033[0m"}")
         errori=["Relè termico","Malfunz. Controller Robot","Sovraccarico","Door or fence open"]
-        tipologia_errore=["Meccanico","Operatore",""]
         n=0
         for i in errori:
             n +=1
             x = f"[{n}] Errore: {i}" 
             print(x)
-        problema = input("\nSeleziona il problema.\n>>> ")
+        problema = input(f"\nSeleziona il problema.\n{"\033[0;31m"}>>> ")
+        print("\033[0m")
         if problema == "1":
-            print("")
-            pass
+            problema = "rele_termico"
+            risoluzione_problema(problema)
+            input(">")
         if problema == "2":
-            pass
+            problema = "malfunz_controller_robot"
+            risoluzione_problema(problema)
+            input(">")
         if problema == "3":
-            pass
+            problema = "sovraccarico"
+            risoluzione_problema(problema)
+            input(">")
         if problema == "4":
-            pass
+            problema = "door_or_fence_open"
+            risoluzione_problema(problema)
+            input(">")
     elif selezione == "3":
-        print("\033c",end="[COMANDI_AMMINISTRATORE]")
+        print("\033c",end="[AGGIUSTA_QUOTE]")
+        print("\n<Work in Progress>")
+        codice_forcella = str(input("inserisci il codice della forcella.\n>>> "))
+        # loading_bar(f"Caricamento misure forcella {codice_forcella}","Caricamento completato")
+        for i in codici_forcelle:
+            if i == codice_forcella:
+                quota = input("Quale quota desideri sistemare?")
+                if quota == "1":
+                    print("Non è possibile modificare il codice materiale da questa funzione.")
+                    pass
+                if quota == "2":
+                    h_tot_attuale = int(input("Inserisci il valore attuale.\n>>> "))
+                    misura_h_tot(codice_forcella,h_tot_attuale)
+                if quota == "3":
+                    centro_sfer_attuale = int(input("Inserisci il valore attuale.\n>>> "))
+                    misura_centro_sfera(codice_forcella,centro_sfer_attuale)
+                if quota == "4":
+                    centro_occhi_attuale = int(input("Inserisci il valore attuale.\n>>> "))
+                    misura_centro_occhi(codice_forcella,centro_occhi_attuale)
+                if quota == "5":
+                    sottoponte_attuale = int(input("Inserisci il valore attuale."))
+                    # misura_sottoponte()
+                if quota == "6":
+                    dist_canaline_attuale = int(input("Inserisci il valore attuale."))
+                    misura_dist_canaline(codice_forcella,dist_canaline_attuale)
+                if quota == "7":
+                    diam_occhi_attuale = int(input("Inserisci il valore attuale."))
+                    misura_diam_occhi(codice_forcella,diam_occhi_attuale)
+                if quota == "8":
+                    diam_canaline_attuale = int(input("Inserisci il valore attuale."))
+                    # misura_diam_canaline()
+                if quota == "9":
+                    diam_flangia_int_attuale = int(input("Inserisci il valore attuale."))
+                    misura_diam_flangia_int(codice_forcella,diam_flangia_int_attuale)
+                if quota == "10":
+                    diam_flangia_est_attuale = int(input("Inserisci il valore attuale."))
+                    misura_diam_flangia_est(codice_forcella,diam_flangia_est_attuale)
+                if quota == "11":
+                    diam_sfera_attuale = int(input("Inserisci il valore attuale."))
+                    misura_diam_sfera(codice_forcella,diam_sfera_attuale)
+                if quota == "12":
+                    pass
+                
+        input(">")
     elif selezione == "4":
-        print("\033c",end="[_ABOUT_]\n\n")
+        print("\033c",end="")
+        print("\033[0;33m"+logo_admin+"\033[0m")
+        login_id = input(f"Inserisci l'admin_ID\n{"\033[0;33m"}>>> ")
+        print("\033[0m")              
+        login_password = input(f"Inserisci l'admin_password\n{"\033[0;33m"}>>> ")
+        print("\033[0m")
+        loading_bar("Caricamento lista_admin", "Caricamento dati completato")
+        if verification_login(lista_admin,login_id,login_password) == False:
+            print("Accesso_Negato.")
+        else:
+            lista_comandi = ["Aggiungi_forcella","Modifica_forcella","Rimuovi_forcella","Aggiungi_problema","Modifica_problema","Elimina_problema"]
+            print("Accesso_Confermato.")
+            formatta_comandi(lista_comandi)
+            comando = input("\n Seleziona un comando\n>>> ")
+            if comando == "1":
+                print("\033c",end="")
+                print("[Aggiungi_Forcella]")
+            if comando == "2":
+                print("\033c",end="")
+                print("[Modifica_Forcella]")
+            if comando == "3":
+                print("\033c",end="")
+                print("[Rimuovi_Forcella]")
+            if comando == "4":
+                print("\033c",end="")
+                print("[Aggiungi_Problema]")
+            if comando == "5":
+                print("\033c",end="")
+                print("[Modifica_Problema]")
+            if comando == "6":
+                print("\033c",end="")
+                print("[Elimina_Problema]")
+
+        input(">")
     elif selezione == "5":
+        print("\033c",end="[_ABOUT_]\n\n")
+        print(f"Salve,\nsono Jacopo Diana, sono un ragazzo di 25 anni, recentemente ho cominciato un nuovo percorso sulle macchine a cointrollo numerico,\ncome molti operatori alle prime armi incorro in molti problemi e al contrario di un operatore esperto ci impiego più tempo a risolverli.\nCosi ho pensato che sarebbe stato utile avere uno strumento a disposizione che mi aiuti nei momenti critici,\na tale scopo ho ideato il 'Mazak_Helper'.\n\nE' un programma in grado di aiutare l'operatore in molteplici scenari:\n\n-Attrezzaggio: Aiuta l'operatore elencando tutti i codici necessari all'attrezzaggio di ogni componente del Mazak, mostra il disegno della\n\t{" "*7}forcella da lavorare,elenca tutte le caratteristiche della forcella e da indicazioni precise su questa fase.\n\n-Risoluz Problemi: Aiuta l'operatore in difficoltà elencando vari possibili problemi/guasti della macchina,l'operatore può selezionare\n\t{" "*7}il problema che sta riscontrando e il programma fornirà un analisi dettagliata del problema dando una o più soluzioni.\n\n-Calcola quote: Aiuta l'operatore nel momento in cui necessita di variare qualche quota (X,Y,Z) per poter portare i valori nelle loro quote nominali.")
+        print("<Work in progress>")
+        input(">")
+    elif selezione == "6":
         print("\033c",end="[_EXIT_]\n\nArrivederci\n\n")
         acceso = False
 
