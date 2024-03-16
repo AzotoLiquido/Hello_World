@@ -1,0 +1,413 @@
+{
+    "2150G0042": {
+      "codici": {
+        "torretta": {
+          "hd1": {
+            "t1": {
+              "utensile": "UTSN 065",
+              "inserto": "UTLI 1201"
+            },
+            "t2": {
+              "utensile": "",
+              "inserto": ""
+            },
+            "t3": {
+              "utensile": "UTSN 343",
+              "inserto": "UTLI 1198"
+            },
+            "t4": {
+              "utensile": "",
+              "inserto": ""
+            },
+            "t5": {
+              "utensile": "UTSN 104",
+              "inserto": "UTLI  526"
+            },
+            "t6": {
+              "utensile": "",
+              "inserto": ""
+            },
+            "t7": {
+              "utensile": "UPTI 180",
+              "inserto": "UTLI  221"
+            },
+            "t8": {
+              "utensile": "UTSN 104",
+              "inserto": "UTLI 1198"
+            },
+            "t9": {
+              "utensile": "UTSN 065",
+              "inserto": "UTLI 1201"
+            },
+            "t10": {
+              "utensile": "UTSN 065",
+              "inserto": "UTLI  526"
+            },
+            "t11": {
+              "utensile": "UPTI 180",
+              "inserto": "UTLI  219"
+            },
+            "t12": {
+              "utensile": "UPTI 180",
+              "inserto": "UTLI  219"
+            }
+          },
+          "hd2": {
+            "t1": {
+              "utensile": "UTSN 064",
+              "inserto": "UTLI 1201"
+            },
+            "t2": {
+              "utensile": "",
+              "inserto": ""
+            },
+            "t3": {
+              "utensile": "UTSN 214",
+              "inserto": "UTLI  321"
+            },
+            "t4": {
+              "utensile": "",
+              "inserto": ""
+            },
+            "t5": {
+              "utensile": "UTSN 214",
+              "inserto": "UTLI  170"
+            },
+            "t6": {
+              "utensile": "",
+              "inserto": ""
+            },
+            "t7": {
+              "utensile": "",
+              "inserto": ""
+            },
+            "t8": {
+              "utensile": "",
+              "inserto": ""
+            },
+            "t9": {
+              "utensile": "UTLN 694",
+              "inserto": "UFRZ  271"
+            },
+            "t10": {
+              "utensile": "UTSN 275",
+              "inserto": "UALC  045"
+            },
+            "t11": {
+              "utensile": "",
+              "inserto": ""
+            },
+            "t12": {
+              "utensile": "",
+              "inserto": ""
+            }
+          }
+        },
+        "mandrino": {
+          "hd1": {
+            "morsa_A": "UMOI 754 + UMOI 759",
+            "morsa_B": "UMOI 753 + UMOI 760",
+            "appoggio": "UAGG 370",
+            "centraggio_sfera": "UAGG 369"
+          },
+          "hd2": {
+            "staffe": "UMOI 779",
+            "appoggio": "UAGG 382",
+            "cono_centr": "UFLA 153"
+          }
+        },
+        "robot": {
+          "morse_bloccaggio": {
+            "flangia": "Serie 'E'",
+            "sfera": "UMOI 780"
+          },
+          "setup_n": "5",
+          "programma_n": "5"
+        },
+        "tempra": {
+          "indotto":"",
+          "base_flangia":"",
+          "programma_n":""
+        },
+        "nastro_caricatore":{
+          "diam_pezzo": 77,
+          "arretramento": 22,
+          "pz_per_fila": 5
+        }
+      },
+      "dimensioni":{
+        "h_tot":{
+            "max": 118.109,
+            "min": 117.900,
+            "asse_rif": "X",
+            "tendenza": 117.900
+        
+        },
+        "centro_sfera": {
+            "max": 107.559,
+            "min": 107.450,
+            "asse_rif": "X",
+            "tendenza": 107.450
+        },
+        "centro_occhi":{
+            "max": 65.559,
+            "min": 65.441,
+            "asse_rif": "X",
+            "tendenza": 65.441
+        },
+        "sottoponte":{
+            "max": 81.500,
+            "min": 80.980,
+            "asse_rif": "X",
+            "tendenza": 80.980
+        },
+        "dist_canaline":{
+            "max": 102.869,
+            "min": 102.760,
+            "asse_rif": "X",
+            "tendenza": 27.930
+        },
+        "diam_occhi":{
+            "max": 27.021,
+            "min": 27.000,
+            "asse_rif": "X",
+            "tendenza": 27.930
+        },
+        "diam_canaline":{
+            "max": 29.050,
+            "min": 28.800,
+            "asse_rif": "X",
+            "tendenza": 27.930
+        },
+        "diam_flangia_int":{
+            "max": 63.030,
+            "min": 63.001,
+            "asse_rif": "X",
+            "tendenza": 27.930
+        },
+        "diam_flangia_est":{
+            "max": 75.080,
+            "min": 75.030,
+            "asse_rif": "X",
+            "tendenza": 27.930
+        },
+        "diam_sfera":{
+            "max": 27.960,
+            "min": 27.930,
+            "asse_rif": "X",
+            "tendenza": 27.930
+        },
+        "quota_g":{
+            "max": 17.100,
+            "min": 16.900,
+            "asse_rif": "X",
+            "tendenza": 27.930
+        }
+      }
+    },
+    "2150L0046": {
+        "codici": {
+          "torretta": {
+            "hd1": {
+              "t1": {
+                "utensile": "UTSN 065",
+                "inserto": "UTLI 1201"
+              },
+              "t2": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t3": {
+                "utensile": "UTSN 343",
+                "inserto": "UTLI 1198"
+              },
+              "t4": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t5": {
+                "utensile": "UTSN 104",
+                "inserto": "UTLI  526"
+              },
+              "t6": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t7": {
+                "utensile": "UPTI 180",
+                "inserto": "UTLI  221"
+              },
+              "t8": {
+                "utensile": "UTSN 343",
+                "inserto": "UTLI 1198"
+              },
+              "t9": {
+                "utensile": "UTSN 065",
+                "inserto": "UTLI 1201"
+              },
+              "t10": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t11": {
+                "utensile": "UPTI 192",
+                "inserto": "UTLI  219"
+              },
+              "t12": {
+                "utensile": "UPTI 192",
+                "inserto": "UTLI  219"
+              }
+            },
+            "hd2": {
+              "t1": {
+                "utensile": "UTSN 064",
+                "inserto": "UTLI  103"
+              },
+              "t2": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t3": {
+                "utensile": "UTSN 214",
+                "inserto": "UTLI  321"
+              },
+              "t4": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t5": {
+                "utensile": "UTSN 214",
+                "inserto": "UTLI  170"
+              },
+              "t6": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t7": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t8": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t9": {
+                "utensile": "UTLN 694",
+                "inserto": "UFRZ  202"
+              },
+              "t10": {
+                "utensile": "UTSN 276",
+                "inserto": "UALC  047"
+              },
+              "t11": {
+                "utensile": "",
+                "inserto": ""
+              },
+              "t12": {
+                "utensile": "",
+                "inserto": ""
+              }
+            }
+          },
+          "mandrino": {
+            "hd1": {
+              "morsa_A": "UMOI 753 + UMOI 1005",
+              "morsa_B": "UMOI 754 + UMOI 1005",
+              "appoggio": "UAGG 365",
+              "centraggio_sfera": "UAGG 366"
+            },
+            "hd2": {
+              "staffe": "UMOI 782",
+              "appoggio": "UAGG 382",
+              "cono_centr": "UFLA 153"
+            }
+          },
+          "robot": {
+            "morse_bloccaggio": {
+              "flangia": "SERIE 'E'",
+              "sfera": "UMOI 780"
+            },
+            "setup_n": "1",
+            "programma_n": "1"
+          },
+          "tempra": {
+            "indotto": "UIND 182",
+            "base_flangia": "UXTI 0395",
+            "programma_n": "3"
+          },
+          "nastro_caricatore": {
+            "diam_pezzo": 82,
+            "arretramento": 22,
+            "pz_per_fila": 5            
+          }
+        },
+        "dimensioni":{
+            "h_tot":{
+                "max": 129.900,
+                "min": 129.700,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "centro_sfera": {
+                "max": 118.000,
+                "min": 117.000,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "centro_occhi":{
+                "max": 73.050,
+                "min": 72.950,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "sottoponte":{
+                "max": 89.000,
+                "min": 88.300,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "dist_canaline":{
+                "max": 109.949,
+                "min": 102.851,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "diam_occhi":{
+                "max": 30.225,
+                "min": 30.200,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "diam_canaline":{
+                "max": 32.050,
+                "min": 31.800,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "diam_flangia_int":{
+                "max": 63.030,
+                "min": 63.001,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "diam_flangia_est":{
+                "max": 80.080,
+                "min": 80.030,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "diam_sfera":{
+                "max": 33.960,
+                "min": 33.930,
+                "asse_rif": "X",
+                "tendenza": 117.900
+            },
+            "quota_g":{
+            "max": 17.100,
+            "min": 16.900,
+            "asse_rif": "X",
+            "tendenza": 117.900
+        }
+        }
+      }
+  }

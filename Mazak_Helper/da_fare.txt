@@ -1,0 +1,9 @@
+1: ridurre il codice aggiusta_quote \ FATTO
+2:ordinare i file in cartelle specifiche \
+    a:file multimediali in cartella media \ 
+    b:file admin in cartella admin \
+    c:file mazak in cartella macchine \
+    d:loghi e liste_ascii in cartella loghi \
+    e:main file esterno a ogni cartella \
+3:ridurre i file json dell mazak(torretta,mandrino,robot,nastro)\ FATTO
+4:cominciare la parte dei comandi admin
