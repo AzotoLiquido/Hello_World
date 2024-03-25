@@ -130,9 +130,9 @@
           "programma_n":""
         },
         "nastro_caricatore":{
-          "diam_pezzo": 77,
-          "arretramento": 22,
-          "pz_per_fila": 5
+          "diam_pezzo": "77",
+          "arretramento": "22",
+          "pz_per_fila": "5"
         }
       },
       "dimensioni":{
@@ -336,9 +336,9 @@
             "programma_n": "3"
           },
           "nastro_caricatore": {
-            "diam_pezzo": 82,
-            "arretramento": 22,
-            "pz_per_fila": 5            
+            "diam_pezzo": "82",
+            "arretramento": "22",
+            "pz_per_fila": "5"            
           }
         },
         "dimensioni":{

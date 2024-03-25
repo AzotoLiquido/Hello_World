@@ -1,8 +1,8 @@
-from Tools.logo import logo,logo_attrezzaggio,logo_risol_problemi,logo_admin,logo_bondioli,logo_calcola_quota# Importo i loghi dal file logo
-from Tools.attrezzaggio import attrezzaggio_forcella,attrez_mandrino_hd1,attrez_mandrino_hd2,attrez_torretta_hd1,attrez_torretta_hd2,attrez_robot_mazak
+from Tools.logo import *# Importo i loghi dal file logo
+from Tools.attrezzaggio import *
 from PIL import Image
-from Tools.risoluzione_problemi import risoluzione_problemi, risoluzione_problema, carica_risoluzione_problemi
-from Tools.admin_commands import carica_lista_admin,lista_admin,verification_login,formatta_comandi
+from Tools.risoluzione_problemi import risoluzione_problemi, risolvi_problema, carica_elenco_problemi
+from Tools.admin_commands import *
 from Tools.aggiusta_quote import *
 import os
 import sys
@@ -63,14 +63,11 @@ class Forcella:
 codice_G = Forcella(codice_materiale="2150G0042",h_tot=118.000,centro_sfera=107.860,centro_occhi=65.500,sottoponte=81.000,dist_canaline=102.860,diam_occhi=27.000,diam_canaline=29.800,diam_flangia_int=63.000,diam_flangia_est=75.000,diam_sfera=28.000,quota_g=17.100)
 codice_L = Forcella(codice_materiale="2150L0046",h_tot=129.800,centro_sfera=117.500,centro_occhi=73.000,sottoponte=88.500,dist_canaline=109.850,diam_occhi=30.200,diam_canaline=33.000,diam_flangia_int=63.000,diam_flangia_est=80.000,diam_sfera=34.000,quota_g=17.100)   
 
-risoluzione_problemi = {}
-risoluzione_problemi = carica_risoluzione_problemi
+risoluzione_problemi = carica_elenco_problemi()
 # Creo una lista dove verranno aggiunti i codici materiale delle forcelle
 codici_forcelle = [codice_G.codice_materiale, codice_L.codice_materiale]
 acceso = True
 ciclo = 0
-
-
 
 while acceso:
     ciclo+=1
@@ -94,105 +91,46 @@ while acceso:
         codice_forcella = str(input(f"Inserisci il codice della forcella:\n{"\033[0;33m"}>>> ")).upper() # Chiedo all'utente il codice della forcella
         print("\033[0m")
         for i in codici_forcelle: # Itero per ogni elemento nella lista dei codici delle forcelle
-            lista_opzioni = ["[Mandrino_HD1]", "[Torretta_HD1]", "[Mandrino_HD2]", "[Torretta_HD2]", "Robot_Trasportatore","[Attrezzaggio_completo]"]
-            numero = 0
+            lista_opzioni = ["[Mandrino HD1-HD2]", "[Torretta_HD1-HD2]", "Robot_Trasportatore","[Attrezzaggio_completo]"]
+            lista_display = [display_mandrino,display_torretta,display_robot,display_forcella]
             if codice_forcella == codice_G.codice_materiale: # Controllo se il codice dell'utente corrisponde a quello della tipologia "G"
-                print(codice_G.show_details()) # Mostro i dettagli della forcella da lavorare
+                display_dimensioni(codice_forcella)# Mostro i dettagli della forcella da lavorare
                 img_forcella1 = Image.open(r"Media\forcella_lato1_G.jpg")
                 img_forcella2 = Image.open(r"Media\forcella_lato2_G.jpg")
                 img_forcella1.show()
                 img_forcella2.show()
-                for i in lista_opzioni: #Creo un menu, dove chiedo all'utente quale parte dell'attrezzaggio visualizzare 
-                    numero += 1
-                    print(f"[{numero}] {i}")
+                for i in enumerate(lista_opzioni): #Creo un menu, dove chiedo all'utente quale parte dell'attrezzaggio visualizzare 
+                    print(f"[{i[0]+1}] {i[1]}")
                 print("\nCosa desideri visualizzare?\n")
-                selezione = input(f"{"\033[0;33m"}>>> ")
+                selezione = lista_display[int(input(f"{"\033[0;33m"}>>> "))-1](codice_forcella)
                 print("\033[0m")
-                if selezione == "1": # se l'utente ha selezionato 1 mostrerò l'attrezzaggio del mandrino hd1
-                    attrez_mandrino_hd1(codice_forcella)
-                    input(">")
-                elif selezione == "2":# se l'utente seleziona 2 mostrerò l'attrezzaggio della torretta hd1
-                    attrez_torretta_hd1(codice_forcella)
-                    input(">")
-                elif selezione == "3":# se l'utente seleziona 3 mostrerò l'attrezzaggio del mandrino hd2
-                    attrez_mandrino_hd2(codice_forcella)
-                    input(">")
-                elif selezione == "4":# se l'utente seleziona 4 mostrerò l'attrezzaggio della torretta hd2
-                    attrez_torretta_hd2(codice_forcella)
-                    input(">")
-                elif selezione == "5":# se l'utente seleziona 5 mostrerò l'attrezzaggio completo del mazak
-                    print("\033c",end="")
-                    attrez_robot_mazak(codice_forcella)
-                    input(">")
-                elif selezione == "6":
-                    print("\033c",end="")
-                    attrezzaggio_forcella(codice_forcella)
-                    input(">")
-                else:# altrimenti dirò all'utente che il comando non esiste e cesserò il programma
-                    print("Comando Inesistente.")
-                    input(">")
+                input(">")
                 break   
             elif codice_forcella == codice_L.codice_materiale:
-                print(codice_L.show_details())
+                display_dimensioni(codice_forcella)
                 img_forcella1 = Image.open("forcella_lato1_L.jpg")
                 img_forcella2 = Image.open("forcella_lato2_L.jpg")
                 img_forcella1.show()
                 img_forcella2.show()
-                for i in lista_opzioni:
-                    numero += 1
-                    print(f"[{numero}] {i}")
-                selezione = input(f"\n{"\033[0;33m"}Cosa desideri visualizzare?\n>>> ")
+                for i in enumerate(lista_opzioni):
+                    print(f"[{i[0]+1}] {i[1]}")
+                selezione = lista_display[int(input(f"\n{"\033[0;33m"}Cosa desideri visualizzare?\n>>> "))-1]
                 print("\033[0m")
-                if selezione == "1":
-                    attrez_mandrino_hd1(codice_forcella)
-                    input(">")
-                elif selezione == "2":
-                    attrez_torretta_hd1(codice_forcella)
-                    input(">")
-                elif selezione == "3":
-                    attrez_mandrino_hd2(codice_forcella)
-                    input(">")
-                elif selezione == "4":
-                    attrez_torretta_hd2(codice_forcella)
-                    input(">")
-                elif selezione == "5":
-                    print("\033c",end="")
-                    attrez_mandrino_hd1(codice_forcella)
-                    input(">")
-                elif selezione == "6":
-                    print("\033c",end="")
-                    attrezzaggio_forcella(codice_forcella)
-                    input(">")
+                input(">")
             else:
                 input(f"Codice {codice_forcella} non Trovato\n>>> ")  
                 break
     elif selezione == "2":
-        print("\033c",end="[RISOLUZIONE_PROBLEMI]\n\n")
+        print("\033c",end="")
         print(f"{"\033[0;33m"}{logo_risol_problemi}{"\033[0m"}")
-        errori=["Relè termico","Malfunz. Controller Robot","Sovraccarico","Door or fence open"]
-        n=0
-        for i in errori:
-            n +=1
-            x = f"[{n}] Errore: {i}" 
-            print(x)
-        problema = input(f"\nSeleziona il problema.\n{"\033[0;33m"}>>> ")
+        problemi=[]
+        for i in enumerate(risoluzione_problemi):
+            print(f"[{i[0]+1}] Errore: {i[1]}") 
+            problemi.append(i[1])
+        problema = problemi[int(input(f"\nSeleziona il problema.\n{"\033[0;33m"}>>> "))-1]
         print("\033[0m")
-        if problema == "1":
-            problema = "rele_termico"
-            risoluzione_problema(problema)
-            input(">")
-        if problema == "2":
-            problema = "malfunz_controller_robot"
-            risoluzione_problema(problema)
-            input(">")
-        if problema == "3":
-            problema = "sovraccarico"
-            risoluzione_problema(problema)
-            input(">")
-        if problema == "4":
-            problema = "door_or_fence_open"
-            risoluzione_problema(problema)
-            input(">")
+        risolvi_problema(problema)
+        input(">")
     elif selezione == "3":
         print("\033c",end="[CALCOLA_CORREZIONE]")
         print("\033[0;33m"+logo_calcola_quota+"\033[0m")
@@ -235,35 +173,17 @@ while acceso:
         if verification_login(lista_admin,login_id,login_password) == False:
             print("Accesso_Negato.")
         else:
-            lista_comandi = ["Aggiungi_forcella","Modifica_forcella","Rimuovi_forcella","Aggiungi_problema","Modifica_problema","Elimina_problema"]
             print("Accesso_Confermato.")
-            formatta_comandi(lista_comandi)
-            comando = input("\n Seleziona un comando\n>>> ")
-            if comando == "1":
-                print("\033c",end="")
-                print("[Aggiungi_Forcella]")
-            if comando == "2":
-                print("\033c",end="")
-                print("[Modifica_Forcella]")
-            if comando == "3":
-                print("\033c",end="")
-                print("[Rimuovi_Forcella]")
-            if comando == "4":
-                print("\033c",end="")
-                print("[Aggiungi_Problema]")
-            if comando == "5":
-                print("\033c",end="")
-                print("[Modifica_Problema]")
-            if comando == "6":
-                print("\033c",end="")
-                print("[Elimina_Problema]")
+            richiama_comandi()
         input(">")
     elif selezione == "5":
         print("\033c",end="[_ABOUT_]\n\n")
-        print(f"Salve,\nsono Jacopo Diana, sono un ragazzo di 25 anni, recentemente ho cominciato un nuovo percorso sulle macchine a cointrollo numerico,\ncome molti operatori alle prime armi incorro in molti problemi e al contrario di un operatore esperto ci impiego più tempo a risolverli.\nCosi ho pensato che sarebbe stato utile avere uno strumento a disposizione che mi aiuti nei momenti critici,\na tale scopo ho ideato il 'Mazak_Helper'.\n\nE' un programma in grado di aiutare l'operatore in molteplici scenari:\n\n-Attrezzaggio: Aiuta l'operatore elencando tutti i codici necessari all'attrezzaggio di ogni componente del Mazak, mostra il disegno della\n\t{" "*7}forcella da lavorare,elenca tutte le caratteristiche della forcella e da indicazioni precise su questa fase.\n\n-Risoluz Problemi: Aiuta l'operatore in difficoltà elencando vari possibili problemi/guasti della macchina,l'operatore può selezionare\n\t{" "*7}il problema che sta riscontrando e il programma fornirà un analisi dettagliata del problema dando una o più soluzioni.\n\n-Calcola quote: Aiuta l'operatore nel momento in cui necessita di variare qualche quota (X,Y,Z) per poter portare i valori nelle loro quote nominali.")
+        print("W.I.P")
+        # print(f"Salve,\nsono Jacopo Diana, sono un ragazzo di 25 anni, recentemente ho cominciato un nuovo percorso sulle macchine a cointrollo numerico,\ncome molti operatori alle prime armi incorro in molti problemi e al contrario di un operatore esperto ci impiego più tempo a risolverli.\nCosi ho pensato che sarebbe stato utile avere uno strumento a disposizione che mi aiuti nei momenti critici,\na tale scopo ho ideato il 'Mazak_Helper'.\n\nE' un programma in grado di aiutare l'operatore in molteplici scenari:\n\n-Attrezzaggio: Aiuta l'operatore elencando tutti i codici necessari all'attrezzaggio di ogni componente del Mazak, mostra il disegno della\n\t{" "*7}forcella da lavorare,elenca tutte le caratteristiche della forcella e da indicazioni precise su questa fase.\n\n-Risoluz Problemi: Aiuta l'operatore in difficoltà elencando vari possibili problemi/guasti della macchina,l'operatore può selezionare\n\t{" "*7}il problema che sta riscontrando e il programma fornirà un analisi dettagliata del problema dando una o più soluzioni.\n\n-Calcola quote: Aiuta l'operatore nel momento in cui necessita di variare qualche quota (X,Y,Z) per poter portare i valori nelle loro quote nominali.")
         input(">")  
     elif selezione == "6":
-        print("\033c",end="[_EXIT_]\n\nArrivederci\n\n")
+        print("\033c",end="")
+        print(logo_chiusura)
         acceso = False
 
 
